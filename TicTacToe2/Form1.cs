@@ -94,11 +94,18 @@ namespace TicTacToe2
         {
             if (cpuTurn)
             {
-                int[] move = CpuWinner();
-                if (move!=null)
+                string moveWin = CpuWinner2("O");
+                string moveBlock = CpuWinner2("X");
+                if (moveWin!=null)
                 {
-                    int num1 = move[0];
-                    int num2 = move[1];
+                    int num1 = int.Parse(moveWin[0].ToString());
+                    int num2 = int.Parse(moveWin[1].ToString());
+                    board[num1,num2] = "O";
+                }
+                else if (moveBlock!=null)
+                {
+                    int num1 = int.Parse(moveBlock[0].ToString());
+                    int num2 = int.Parse(moveBlock[1].ToString());
                     board[num1, num2] = "O";
                 }
                 else
@@ -132,7 +139,7 @@ namespace TicTacToe2
             
         }
 
-        private int[] CpuWinner()
+        /*private int[] CpuWinner()
         {
             for (int f = 0; f < 2; f++)
             {
@@ -290,6 +297,78 @@ namespace TicTacToe2
                     }
                 }
             }
+            return null;
+        }*/
+        private string CpuWinner2(string sym)
+        {
+            if (((board[0, 1] == board[0, 2] && board[0, 1] == sym)
+                || (board[1, 0] == board[2, 0] && board[1, 0] == sym)
+                || (board[1, 1] == board[2, 2] && board[1, 1] == sym))
+                && board[0, 0] == " ")
+            {
+                return "00";
+            }
+
+            if (((board[0, 0] == board[0, 2] && board[0, 0] == sym)
+                || (board[1, 1] == board[2, 1] && board[1, 1] == sym))
+                && board[0, 1] == " ")
+            {
+                return "01";
+            }
+
+            if (((board[0, 0] == board[0, 1] && board[0, 0] == sym)
+                || (board[1, 2] == board[2, 2] && board[1, 2] == sym)
+                || (board[1, 1] == board[2, 0] && board[1, 1] == sym))
+                && board[0, 2] == " ")
+            {
+                return "02";
+            }
+
+            if (((board[0, 0] == board[2,0] && board[0, 0] == sym)
+                || (board[1, 1] == board[1,2] && board[1, 1] == sym))
+                && board[1, 0] == " ")
+            {
+                return "10";
+            }
+
+            if (((board[0, 1] == board[2, 1] && board[0, 1] == sym)
+                || (board[1, 0] == board[1, 2] && board[1, 0] == sym))
+                && board[1, 1] == " ")
+            {
+                return "11";
+            }
+
+            if (((board[0, 2] == board[2, 2] && board[0, 2] == sym)
+                || (board[1, 0] == board[1, 1] && board[1, 0] == sym))
+                && board[1, 2] == " ")
+            {
+                return "12";
+            }
+
+            if (((board[0, 0] == board[1, 0] && board[0, 0] == sym)
+                || (board[1, 1] == board[0, 2] && board[1, 1] == sym)
+                || (board[2, 1] == board[2, 2] && board[2, 1] == sym))
+                && board[2, 0] == " ")
+            {
+                return "20";
+            }
+
+            if (((board[0, 1] == board[1, 1] && board[0, 1] == sym)
+                || (board[2, 0] == board[2, 2] && board[2, 0] == sym))
+                && board[2, 1] == " ")
+            {
+                return "21";
+            }
+
+            if (((board[0, 0] == board[1, 1] && board[0, 0] == sym)
+                || (board[0, 2] == board[1, 2] && board[0, 2] == sym)
+                || (board[2, 0] == board[2, 1] && board[2, 0] == sym))
+                && board[2, 2] == " ")
+            {
+                return "22";
+            }
+
+
             return null;
         }
 
